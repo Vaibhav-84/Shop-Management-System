@@ -33,7 +33,9 @@
 
 
     <!-- Font Awesome cdn  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" />
 
     <style>
         .bd-placeholder-img {
@@ -54,7 +56,8 @@
             min-height: 75rem;
             padding-top: 4.5rem;
         }
-        a{
+
+        a {
             text-decoration: none;
         }
     </style>
@@ -67,6 +70,17 @@
     {% include 'navbar.html' %}
 
     <main class="container">
+
+        <!-- messages -->
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+        </ul>
+        {% endif %}
+ 
+        <!-- main  -->
         <div class="bg-light p-5 rounded">
             <div class="header">{{header}}</div>
             <form method='POST' action=''>{% csrf_token %}
@@ -82,6 +96,8 @@
                             <th>CATEGORY</th>
                             <th>ITEM NAME</th>
                             <th>QUANTITY IN STORE</th>
+                            <!-- <th>TIMESTAMP</th> -->
+                            <th>LAST UPDATED</th>
                             <th>DELETE</th>
                         </tr>
                     </thead>
@@ -91,7 +107,10 @@
                         <td>{{instance.category}}</td>
                         <td><a href="{% url 'update_items' instance.id %}">{{instance.item_name}}</a></td>
                         <td>{{instance.quantity}}</td>
-                        <td><a href="{% url 'delete_items' instance.id %}"><i class="fas fa-trash-alt" style="color:red"></i></a></td>
+                        <!-- <td>{{instance.timestamp}}</td> -->
+                        <td>{{instance.last_updated}}</td>
+                        <td><a href="{% url 'delete_items' instance.id %}"><i class="fas fa-trash-alt"
+                                    style="color:red"></i></a></td>
                     </tr>
                     {% endfor %}
                 </table>
