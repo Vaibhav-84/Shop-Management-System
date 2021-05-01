@@ -1,3 +1,6 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">VM-STOCK</a>
@@ -18,12 +21,15 @@
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         {% if request.user.is_authenticated %}
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="/list_items">List Items</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="/add_items">Add Items</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/list_history">List History</a>
+       </li>
         {% endif %}
       </ul>
       <ul class="navbar-nav">
@@ -40,3 +46,5 @@
     </div>
   </div>
 </nav>
+
+<a href="https://vaibhavbhapkar.netlify.app/" target="_blank"><div id="version-display">SMS Ver: 1.0</div></a>
