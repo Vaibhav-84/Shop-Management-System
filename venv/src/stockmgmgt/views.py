@@ -32,11 +32,11 @@ def list_items(request):
 
     if request.method == 'POST':
         category = form['category'].value()
-        # queryset = StockHistory.objects.filter(
-        #     item_name__icontains=form['item_name'].value()
-        # )
-        # if (category != ''):
-        queryset = queryset.filter(category_id=category)
+        queryset = StockHistory.objects.filter(
+            item_name__icontains=form['item_name'].value()
+        )
+        if (category != ''):
+            queryset = queryset.filter(category_id=category)
             
         if form['export_to_CSV'].value() == True:
             response = HttpResponse(content_type='text/csv')
